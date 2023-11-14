@@ -77,10 +77,7 @@ public class MulticastListener extends Thread {
         running = false;
     }
 
-    public synchronized void addMessage(String message) {
-        messages.add(message);
-        numOfMessage++;
-    }
+   
 
 
 }
