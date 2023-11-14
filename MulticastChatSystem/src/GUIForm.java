@@ -82,7 +82,7 @@ public class GUIForm {
                 String name = tfName.getText();
 
                 //Send and receive message
-                multicastSender.sendMessage("", groupName, port);
+                multicastSender.sendMessage("\n\n" + name + " is connected to chat at " + groupName + "\n", groupName, port);
                 multicastListener = new MulticastListener(name, groupName, port, messageArray, currentNumMessage);
                 multicastListener.start();
 
