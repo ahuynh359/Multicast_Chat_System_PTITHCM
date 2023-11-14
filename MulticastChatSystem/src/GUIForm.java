@@ -105,8 +105,6 @@ public class GUIForm {
             try {
                 multicastListener.stopProgram();
                 String mess = tfName.getText() + " is disconnecting from chat! \n";
-
-
                 multicastSender.sendMessage(mess, tfGroupName.getText(), Integer.parseInt(tfPort.getText()));
                 multicastListener.join(1000);
             } catch (Exception err) {
