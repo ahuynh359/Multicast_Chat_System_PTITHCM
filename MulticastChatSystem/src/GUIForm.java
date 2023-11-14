@@ -17,7 +17,6 @@ public class GUIForm {
     private JTextArea taMessage;
     private JLabel lbMessage;
     private JPanel panelCrypto;
-    private JPanel panelButton;
     private JPanel panelChat;
     private JTextField tfMessage;
     private JButton btnSend;
@@ -28,8 +27,6 @@ public class GUIForm {
     private JTextField tfKey;
     private JLabel lbKey;
     private JLabel lbSendMessage;
-    private JTextField tfParticipates;
-    private JLabel lbNumberConnected;
 
     private MulticastSender multicastSender;
     private MulticastListener multicastListener;
@@ -220,7 +217,7 @@ public class GUIForm {
         public void actionPerformed(ActionEvent e) {
 
             try {
-                tfParticipates.setText(multicastListener.participants());
+
 
                 messageArray = multicastListener.getMessages();
                 int numMessage = multicastListener.totalMessages();

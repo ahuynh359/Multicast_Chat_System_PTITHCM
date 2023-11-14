@@ -17,7 +17,7 @@ public class MulticastListener extends Thread {
     private volatile Boolean running;
 
     private volatile int numOfMessage;
-    private volatile static Set<InetAddress> participants = new HashSet<>();
+
 
     public MulticastListener(String userName, String groupName, int port, ArrayList<String> messages, int numOfMessage) {
         this.userName = userName;
@@ -38,7 +38,7 @@ public class MulticastListener extends Thread {
             socket.joinGroup(group);
 
 
-            participants.add(group);
+
 
 
 
@@ -82,7 +82,5 @@ public class MulticastListener extends Thread {
         numOfMessage++;
     }
 
-    public synchronized String participants(){
-        return String.valueOf(participants.size());
-    }
+
 }
