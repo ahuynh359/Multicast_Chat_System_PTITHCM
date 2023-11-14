@@ -2,8 +2,9 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.InetAddress;
 import java.net.MulticastSocket;
-import java.net.NetworkInterface;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class MulticastListener extends Thread {
 
@@ -16,6 +17,7 @@ public class MulticastListener extends Thread {
     private volatile Boolean running;
 
     private volatile int numOfMessage;
+    private volatile static Set<InetAddress> participants = new HashSet<>();
 
     public MulticastListener(String userName, String groupName, int port, ArrayList<String> messages, int numOfMessage) {
         this.userName = userName;
@@ -24,6 +26,7 @@ public class MulticastListener extends Thread {
         this.messages = messages;
         this.numOfMessage = numOfMessage;
         this.running = true;
+
 
     }
 
@@ -34,11 +37,18 @@ public class MulticastListener extends Thread {
             MulticastSocket socket = new MulticastSocket(port);
             socket.joinGroup(group);
 
+
+            participants.add(group);
+
+
+
             messages.add("\n\n" + userName + " is connected to chat at " + groupName + "\n");
             numOfMessage++;
             while (running) {
                 DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
                 socket.receive(packet);
+
+
 
                 String message = new String(packet.getData(), 0, packet.getLength());
 
@@ -70,5 +80,9 @@ public class MulticastListener extends Thread {
     public synchronized void addMessage(String message) {
         messages.add(message);
         numOfMessage++;
+    }
+
+    public synchronized String participants(){
+        return String.valueOf(participants.size());
     }
 }

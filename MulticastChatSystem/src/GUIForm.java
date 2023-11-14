@@ -1,5 +1,4 @@
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -29,6 +28,8 @@ public class GUIForm {
     private JTextField tfKey;
     private JLabel lbKey;
     private JLabel lbSendMessage;
+    private JTextField tfParticipates;
+    private JLabel lbNumberConnected;
 
     private MulticastSender multicastSender;
     private MulticastListener multicastListener;
@@ -65,6 +66,7 @@ public class GUIForm {
         UpdateSystem updateSystem = new UpdateSystem();
         Timer timer = new Timer(700, updateSystem);
         timer.start();
+
 
 
     }
@@ -218,6 +220,7 @@ public class GUIForm {
         public void actionPerformed(ActionEvent e) {
 
             try {
+                tfParticipates.setText(multicastListener.participants());
 
                 messageArray = multicastListener.getMessages();
                 int numMessage = multicastListener.totalMessages();
