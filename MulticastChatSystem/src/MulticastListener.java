@@ -38,16 +38,11 @@ public class MulticastListener extends Thread {
             socket.joinGroup(group);
 
 
-
-
-
-
             messages.add("\n\n" + userName + " is connected to chat at " + groupName + "\n");
             numOfMessage++;
             while (running) {
                 DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
                 socket.receive(packet);
-
 
 
                 String message = new String(packet.getData(), 0, packet.getLength());
@@ -76,8 +71,6 @@ public class MulticastListener extends Thread {
     public synchronized void stopProgram() {
         running = false;
     }
-
-   
 
 
 }

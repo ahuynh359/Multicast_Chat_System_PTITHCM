@@ -39,7 +39,6 @@ public class GUIForm {
         handleEvent();
 
 
-
     }
 
     private void init() {
@@ -63,7 +62,6 @@ public class GUIForm {
         UpdateSystem updateSystem = new UpdateSystem();
         Timer timer = new Timer(700, updateSystem);
         timer.start();
-
 
 
     }
@@ -92,7 +90,6 @@ public class GUIForm {
                 btnSend.setEnabled(true);
                 btnLeaveChat.setEnabled(true);
                 togglePanelSendMessage(true);
-                togglePanelEncrypt(true);
                 togglePanelIp(false);
                 togglePanelName(false);
 
@@ -112,7 +109,7 @@ public class GUIForm {
 
                 multicastSender.sendMessage(mess, tfGroupName.getText(), Integer.parseInt(tfPort.getText()));
                 multicastListener.join(1000);
-            } catch (Exception err){
+            } catch (Exception err) {
                 err.printStackTrace();
             }
 
@@ -120,7 +117,6 @@ public class GUIForm {
             btnSend.setEnabled(false);
             btnLeaveChat.setEnabled(false);
             togglePanelSendMessage(false);
-            togglePanelEncrypt(false);
             togglePanelIp(true);
             togglePanelName(true);
         });
@@ -128,21 +124,21 @@ public class GUIForm {
         //Btn send message
         btnSend.addActionListener(e -> {
             String mess = tfName.getText() + ": " + tfMessage.getText();
-            multicastSender.sendMessage(mess,tfGroupName.getText(),Integer.parseInt(tfPort.getText()));
+            multicastSender.sendMessage(mess, tfGroupName.getText(), Integer.parseInt(tfPort.getText()));
             tfMessage.setText("");
         });
 
         //Btn Exit
         btnExit.addActionListener(e -> {
-            if(btnLeaveChat.isEnabled()){
+            if (btnLeaveChat.isEnabled()) {
                 multicastListener.stopProgram();
                 try {
                     multicastListener.join(500);
-                }catch (Exception err){
+                } catch (Exception err) {
                     err.printStackTrace();
                 }
                 String mess = tfName.getText() + " has exited chart!";
-                multicastSender.sendMessage(mess,tfGroupName.getText(),Integer.parseInt(tfPort.getText()));
+                multicastSender.sendMessage(mess, tfGroupName.getText(), Integer.parseInt(tfPort.getText()));
             }
             System.exit(0);
         });
@@ -195,11 +191,7 @@ public class GUIForm {
 
     }
 
-    private void togglePanelEncrypt(Boolean toggle) {
-        lbKey.setEnabled(toggle);
-        cmbEncrypt.setEnabled(toggle);
-        tfKey.setEnabled(toggle);
-    }
+
 
     public void startGUI() {
         JFrame frame = new JFrame("Multicast Chat Room");
@@ -217,7 +209,6 @@ public class GUIForm {
         public void actionPerformed(ActionEvent e) {
 
             try {
-
 
                 messageArray = multicastListener.getMessages();
                 int numMessage = multicastListener.totalMessages();
