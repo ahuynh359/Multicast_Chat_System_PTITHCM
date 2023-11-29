@@ -70,9 +70,6 @@ public class GUIForm {
         //Btn Join Chat
         btnJoinChat.addActionListener(e -> {
             if (handleErrorBeforeConver()) {
-
-
-
                 //Get info from text field
                 String groupName = tfGroupName.getText();
                 int port = Integer.parseInt(tfPort.getText());

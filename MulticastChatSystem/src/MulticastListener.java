@@ -43,14 +43,9 @@ public class MulticastListener extends Thread {
             while (running) {
                 DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
                 socket.receive(packet);
-
-
                 String message = new String(packet.getData(), 0, packet.getLength());
-
                 messages.add(message);
                 numOfMessage++;
-
-
             }
             socket.leaveGroup(group);
             socket.close();
