@@ -5,7 +5,6 @@
 1. Tải IntelliJ IDEA
 https://www.jetbrains.com/idea/download/?section=windows
 2. Mở folder MulticastChatSystem
-![Uploading image.png…]()
 
 
 
