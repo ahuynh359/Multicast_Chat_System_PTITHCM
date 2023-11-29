@@ -71,7 +71,7 @@ public class GUIForm {
         btnJoinChat.addActionListener(e -> {
             if (handleErrorBeforeConver()) {
 
-                btnJoinChat.setEnabled(false);
+
 
                 //Get info from text field
                 String groupName = tfGroupName.getText();
@@ -79,7 +79,11 @@ public class GUIForm {
                 String name = tfName.getText();
 
                 //Send and receive message
-                multicastSender.sendMessage("\n\n" + name + " is connected to chat at " + groupName + "\n", groupName, port);
+                boolean res = multicastSender.sendMessage("\n\n" + name + " is connected to chat at " + groupName + "\n", groupName, port);
+                if(!res){
+                    createErrorPane("Check group name and port");
+                    return;
+                }
                 multicastListener = new MulticastListener(name, groupName, port, messageArray, currentNumMessage);
                 multicastListener.start();
 
@@ -87,6 +91,7 @@ public class GUIForm {
                 currentNumMessage = multicastListener.totalMessages();
 
                 //Set UI
+                btnJoinChat.setEnabled(false);
                 btnSend.setEnabled(true);
                 btnLeaveChat.setEnabled(true);
                 togglePanelSendMessage(true);
@@ -122,7 +127,10 @@ public class GUIForm {
         //Btn send message
         btnSend.addActionListener(e -> {
             String mess = tfName.getText() + ": " + tfMessage.getText();
-            multicastSender.sendMessage(mess, tfGroupName.getText(), Integer.parseInt(tfPort.getText()));
+            boolean res = multicastSender.sendMessage(mess, tfGroupName.getText(), Integer.parseInt(tfPort.getText()));
+            if(!res){
+                createErrorPane("Error when sending messages");
+            }
             tfMessage.setText("");
         });
 
